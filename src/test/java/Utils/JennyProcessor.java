@@ -35,16 +35,58 @@ public class JennyProcessor {
 //            ProcessBuilder processBuilder = new ProcessBuilder(command);
 //            processBuilder.directory(workingDirectory);
 
-            File workingDirectory = new File("."); // Répertoire courant
 
-            // Construire la commande sous forme de liste
-            ProcessBuilder processBuilder = new ProcessBuilder("./jenny", "-n2", "7", "7", "7");
 
-            // Définir le répertoire de travail
+
+            String os = System.getProperty("os.name").toLowerCase(); // Convertir en minuscule pour éviter la casse
+
+            ProcessBuilder processBuilder = null;
+            File workingDirectory = null;
+
+            if (os.contains("win")) {
+                System.out.println("Système d'exploitation : Windows");
+                            // Définir le répertoire de travail comme étant le répertoire courant (demo)
+             workingDirectory = new File(".");
+
+            // Construire la commande
+            //String command = "cmd /c .\\jenny.exe -n2 7 7 7 > scenario.txt";
+            String command = "./jenny -n2 7 7 7 > scenario.txt";
+
+            // Exécuter la commande dans le répertoire spécifié
+          //  ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command);
+                //  processBuilder = new ProcessBuilder(command);
             processBuilder.directory(workingDirectory);
+            } else if (os.contains("nix") || os.contains("nux") || os.contains("mac"))
+            {
+                System.out.println("Système d'exploitation : Linux / Unix / macOS");
+                 workingDirectory = new File("."); // Répertoire courant
 
-            // Rediriger la sortie vers un fichier
-            processBuilder.redirectOutput(new File("scenario.txt"));
+                // Construire la commande sous forme de liste
+                 processBuilder = new ProcessBuilder("./jenny", "-n2", "7", "7", "7");
+
+                // Définir le répertoire de travail
+                processBuilder.directory(workingDirectory);
+
+                // Rediriger la sortie vers un fichier
+                processBuilder.redirectOutput(new File("scenario.txt"));
+
+            } else {
+                System.out.println("Système d'exploitation inconnu : " + os);
+                 workingDirectory = new File("."); // Répertoire courant
+
+                // Construire la commande sous forme de liste
+                 processBuilder = new ProcessBuilder("./jenny", "-n2", "7", "7", "7");
+
+                // Définir le répertoire de travail
+                processBuilder.directory(workingDirectory);
+
+                // Rediriger la sortie vers un fichier
+                processBuilder.redirectOutput(new File("scenario.txt"));
+            }
+
+
+
+
 
             Process process = processBuilder.start();
 
