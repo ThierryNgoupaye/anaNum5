@@ -23,40 +23,27 @@ public class JennyProcessor {
 
     public void run() {
         try {
-//            // Définir le répertoire de travail comme étant le répertoire courant (demo)
-//            File workingDirectory = new File(".");
-//
-//            // Construire la commande
-//            //String command = "cmd /c .\\jenny.exe -n2 7 7 7 > scenario.txt";
-//            String command = "./jenny -n2 7 7 7 > scenario.txt";
-//
-//            // Exécuter la commande dans le répertoire spécifié
-//          //  ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command);
-//            ProcessBuilder processBuilder = new ProcessBuilder(command);
-//            processBuilder.directory(workingDirectory);
-
-
-
 
             String os = System.getProperty("os.name").toLowerCase(); // Convertir en minuscule pour éviter la casse
 
             ProcessBuilder processBuilder = null;
             File workingDirectory = null;
 
-            if (os.contains("win")) {
+            if (os.contains("win"))
+            {
                 System.out.println("Système d'exploitation : Windows");
-                            // Définir le répertoire de travail comme étant le répertoire courant (demo)
+
+            // Définir le répertoire de travail comme étant le répertoire courant (demo)
              workingDirectory = new File(".");
 
             // Construire la commande
-            //String command = "cmd /c .\\jenny.exe -n2 7 7 7 > scenario.txt";
-            String command = "./jenny -n2 7 7 7 > scenario.txt";
+            String command = "cmd /c .\\jenny.exe -n2 7 7 7 > scenario.txt";
 
             // Exécuter la commande dans le répertoire spécifié
-          //  ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command);
-                //  processBuilder = new ProcessBuilder(command);
-            processBuilder.directory(workingDirectory);
-            } else if (os.contains("nix") || os.contains("nux") || os.contains("mac"))
+             processBuilder = new ProcessBuilder("cmd", "/c", command);
+             processBuilder.directory(workingDirectory);
+            }
+            else if (os.contains("nix") || os.contains("nux") || os.contains("mac"))
             {
                 System.out.println("Système d'exploitation : Linux / Unix / macOS");
                  workingDirectory = new File("."); // Répertoire courant
@@ -85,14 +72,11 @@ public class JennyProcessor {
             }
 
 
-
-
-
             Process process = processBuilder.start();
 
             // Attendre la fin de l'exécution
             int exitCode = process.waitFor();
-           // System.out.println("Process exited with code: " + exitCode);
+            System.out.println("Process exited with code: " + exitCode);
 
             // Lire le fichier généré
             List<String> combinations = readFile(new File(workingDirectory, "scenario.txt").getPath());
