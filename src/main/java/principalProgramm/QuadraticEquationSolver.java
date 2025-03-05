@@ -1,7 +1,9 @@
 package principalProgramm;
 
-public class QuadraticEquationSolver {
-    public static double[] solveQuadraticEquation(double a, double b, double c) {
+public class QuadraticEquationSolver implements QuadraticEquationInterface {
+
+    @Override
+    public double[] solveQuadraticEquation(double a, double b, double c) {
         // Vérification des cas invalides
         if (Double.isNaN(a) || Double.isNaN(b) || Double.isNaN(c)) {
             throw new IllegalArgumentException("Les coefficients ne peuvent pas être NaN.");
@@ -19,7 +21,7 @@ public class QuadraticEquationSolver {
         // Calcul du discriminant Δ = b² - 4ac
         double discriminant = b * b - 4 * a * c;
         // Gestion des problèmes numériques dus aux erreurs d'arrondi
-        if (Math.abs(discriminant) < 1e-10) { // Discriminant proche de 0
+        if (Math.abs(discriminant) < 1e-20) { // Discriminant proche de 0
             double root = -b / (2 * a);
             return new double[]{root}; // Racine double
         }

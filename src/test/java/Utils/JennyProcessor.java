@@ -1,4 +1,4 @@
-package principalProgramm;
+package Utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,20 +23,34 @@ public class JennyProcessor {
 
     public void run() {
         try {
-            // Définir le répertoire de travail comme étant le répertoire courant (demo)
-            File workingDirectory = new File(".");
+//            // Définir le répertoire de travail comme étant le répertoire courant (demo)
+//            File workingDirectory = new File(".");
+//
+//            // Construire la commande
+//            //String command = "cmd /c .\\jenny.exe -n2 7 7 7 > scenario.txt";
+//            String command = "./jenny -n2 7 7 7 > scenario.txt";
+//
+//            // Exécuter la commande dans le répertoire spécifié
+//          //  ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command);
+//            ProcessBuilder processBuilder = new ProcessBuilder(command);
+//            processBuilder.directory(workingDirectory);
 
-            // Construire la commande
-            String command = "cmd /c .\\jenny.exe -n2 7 7 7 > scenario.txt";
+            File workingDirectory = new File("."); // Répertoire courant
 
-            // Exécuter la commande dans le répertoire spécifié
-            ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command);
+            // Construire la commande sous forme de liste
+            ProcessBuilder processBuilder = new ProcessBuilder("./jenny", "-n2", "7", "7", "7");
+
+            // Définir le répertoire de travail
             processBuilder.directory(workingDirectory);
+
+            // Rediriger la sortie vers un fichier
+            processBuilder.redirectOutput(new File("scenario.txt"));
+
             Process process = processBuilder.start();
 
             // Attendre la fin de l'exécution
             int exitCode = process.waitFor();
-            System.out.println("Process exited with code: " + exitCode);
+           // System.out.println("Process exited with code: " + exitCode);
 
             // Lire le fichier généré
             List<String> combinations = readFile(new File(workingDirectory, "scenario.txt").getPath());
