@@ -2,6 +2,9 @@ package Laplace1D;
 
 
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,6 +52,19 @@ public class LaplaceSolverCDS implements ISolveLaplaceEquation1D {
         X.set(n - 1, B.get(n - 1) / D.get(n - 1));
         for (int i = n - 2; i >= 0; i--) {
             X.set(i, (B.get(i) - U.get(i) * X.get(i + 1)) / D.get(i));
+        }
+
+        //Write solution in a text file
+        double x;
+        try (BufferedWriter solutionWriter = new BufferedWriter(new FileWriter("./log/result.txt"))) {
+            for (Double value : X) {
+                x = a + X.indexOf(value)*h;
+                solutionWriter.write(x + " " + value);
+                solutionWriter.newLine();
+            }
+        } catch (IOException e) {
+            e.getMessage();
+            e.getLocalizedMessage();
         }
 
         return X;
