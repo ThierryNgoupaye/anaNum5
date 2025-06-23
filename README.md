@@ -63,7 +63,7 @@ projet-analyse-numerique/
 ## 📊 Méthodes implémentées
 
 ### 🔹 Différences Finies
-- Discrétisation de l'EDO/EDP sur des grilles
+- Discrétisation de l'EDP sur des grilles
 - Construction de matrices tridiagonales
 - Résolution via Gauss-Seidel ou d'autres solveurs
 
