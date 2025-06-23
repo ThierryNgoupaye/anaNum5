@@ -56,16 +56,16 @@ public class LaplaceSolverCDS implements ISolveLaplaceEquation1D {
             X.set(i, (B.get(i) - U.get(i) * X.get(i + 1)) / D.get(i));
         }
         
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
-            for (Double value : X) {
-                x = a + (j + 1) * h;
-                writer.write(x + ":" + value.toString());
-                writer.newLine();
-                j++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
+        //     for (Double value : X) {
+        //         x = a + (j + 1) * h;
+        //         writer.write(x + ":" + value.toString());
+        //         writer.newLine();
+        //         j++;
+        //     }
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
 
         return X;
     }

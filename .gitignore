@@ -39,3 +39,7 @@ build/
 
 */.qodo/
 */.qodo
+
+
+*.sh
+*.txt
