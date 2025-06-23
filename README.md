@@ -68,9 +68,7 @@ projet-analyse-numerique/
 - Résolution via Gauss-Seidel ou d'autres solveurs
 
 ### 🔹 Volumes Finis
-- Formulation intégrale par conservation
 - Maillage régulier
-- Approximation des flux aux interfaces
 
 ---
 
@@ -79,7 +77,7 @@ projet-analyse-numerique/
 L’approche par **tests** permet de :
 - Vérifier la **convergence** et la **précision** des méthodes
 - Comparer les résultats numériques à des **solutions exactes**
-- Garantir la **robustesse** du code
+- Génération des cas de test avec **Jenny**
 
 L’ensemble des tests est écrit avec **JUnit** et exécuté via **Maven**.
 
@@ -87,9 +85,6 @@ L’ensemble des tests est écrit avec **JUnit** et exécuté via **Maven**.
 ```bash
 mvn clean test
 ````
-
----
-
 
 
 ## ⚙️ Compilation et exécution
@@ -106,6 +101,3 @@ mvn compile
 mvn exec:java -Dexec.mainClass="principalProgramm.Main"
 ```
 
-> Remarque : Le fichier `pom.xml` doit inclure le plugin `exec-maven-plugin` pour permettre cette commande.
-
----
