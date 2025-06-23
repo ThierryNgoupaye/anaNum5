@@ -1,6 +1,6 @@
 package Runner;
 
-import Laplace1DEquationSolver.LaplaceSolverCDS;
+import Laplace1DEquationSolver.LaplaceSolverFVM;
 import Laplace1DEquationSolver.ISolveLaplaceEquation1D;
 import javax.swing.*;
 import java.awt.*;
