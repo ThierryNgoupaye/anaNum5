@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from mpl_toolkits.mplot3d import Axes3D
 import os
+import glob # <--- CORRECTION : CET IMPORT MANQUAIT
 
 def plot_2d_heatmap(X, Y, Z, title, ax):
     """Affiche une carte de chaleur 2D sur un axe donné."""
@@ -108,10 +109,10 @@ def plot_convergence_rate(base_name, results_dir):
     plt.loglog(h_sorted, errors_sorted, 'o-', label='Erreur Numérique (E_max)')
     
     # Ajout d'une ligne de référence de pente 2
-    # E = C*h^2 -> on trouve C avec le premier point
-    C = errors_sorted[0] / (h_sorted[0]**2)
-    h_ref = np.array(h_sorted)
-    plt.loglog(h_ref, C * h_ref**2, 'r--', label='Référence (pente 2)')
+    if errors_sorted and h_sorted:
+        C = errors_sorted[0] / (h_sorted[0]**2)
+        h_ref = np.array(h_sorted)
+        plt.loglog(h_ref, C * h_ref**2, 'r--', label='Référence (pente 2)')
     
     plt.title(f"Taux de Convergence pour {base_name}")
     plt.xlabel("Pas du maillage (h)")
@@ -153,5 +154,5 @@ def main():
         
     print("\nAnalyse terminée.")
 
-
-# 
+if __name__ == "__main__":
+    main()
